@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+    <title>Grocery List app</title>
+</head>
+<style>
+
+.jumbotron {
+    padding: 1px;
+
+    background-color: #98ccae;
+    background-color: #b8ffea;
+    background-color: #ffb991 ;
+    color: #5f2f22;
+}
+html {
+    background-color: #b8ffea;
+    background-color: #ffb991 ;
+}
+    .alert-primary {
+    color: #5f2f22;
+    background-color: #b8ffea;
+    border-color: #b8ffea;
+}
+</style>
+<body>
+
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Please sign up for the Grocery Store App  <br>
+       </h1>
+            <h2 class="alert alert-primary"> ${(message) ? message : "Sign up"}</h2>
+          <p class="lead text-muted">    
+              <form
+        action="/signup"
+        method="POST"
+        >  
+            <!-- copied from https://getbootstrap.com/docs/4.1/components/forms/ -->
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input required value="tony@tony.com" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input required value="password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </p>
+        </div>
+      </section>
+
+
+
+        
+        
+</body>
+</html>
