@@ -1,44 +1,67 @@
 const User = require('../models/users');
+
+
+const Photos = require('../models/photos')
+const UserScore = require('../models/scores')
+
+
 const Store = require('../models/stores');
 const Item = require('../models/items');
-const UserStore = require('../models/users-stores');
-
 
 
 const escapeHtml = require('../utils');
 
 async function  loadMainPage(req, res) {
-    //get items first
-    // console.log("we are getting here");
-    // console.log(req.session.stores)
-    // console.log("This is the store id from form:",req.body.id)
-    // if (!req.body.id ) {
-
-    //     req.body.id = req.session.userID
-    // }
-   
-            const arrayOfItems = await Store.items(parseInt(req.body.id));
-    
-    
-
-
-
-    console.log("items ",arrayOfItems)
-    const storeName = await Store.getById(req.body.id);
-    req.session.storeID = req.body.id;  //current store id
-    req.session.storeName = storeName.storeName;  //current store name
-    console.log("The store name is", req.session.storeName.storeName);
     req.session.save(  () => {
-        //then render main with session vars and items.
-        // console.log("storeID");
-        res.render('main',{locals:{user:req.session.user,storeid:req.session.storeID,stores:req.session.stores,items:arrayOfItems,storeName:req.session.storeName}})
 
-    })
+        //if there is no logged in user, then redirect to login.
+        //otherwise direclty going to /main will work
+        if (req.session.userObject === null) {
+            res.redirect('login')
+        }
 
+        //#@#@#@#@#@#@#@#  THIS WILL CHANGE TO MY **FRONTEN D****
+        res.render('main')
     
-
+    })   
 }
 
+///I DON'T THINK I NEED ANY OF THIS......
+//ALTHOUGH THESE WILL BEE REPACED WITH THE CALLS TO MY DATABASE THAT REACT WILL USE WITH
+//PATH VARIABLES....
+
+//GET ALL PHOTO URLS
+//GET ALL SCORES
+//ADD A SCORE
+//ADD A PHOTO
+
+async function getScores (req, res) {
+    // use req.session.userObject.id as the userID from
+    console.log("getScores is running");
+    const theScores = await UserScore.getAllScores(req.session.userObject.id)
+    //just return the json object.
+    console.log(theScores);
+    res.redirect('/main')
+    //this will used as an axios/fetch
+
+    //don't res.render
+}
+async function getURLArray (req, res) {
+    // use req.session.userObject.id as the userID from
+    console.log("getURLArray is running");
+    const urlArray = await Photos.getPhotoURLs(req.session.userObject.id);
+    console.log(urlArray);
+    res.redirect('/main');
+    return urlArray;
+}
+async function addScore (req, res) {
+    //the score value will be passed as an url parameter from react
+    const userid = req.params.id;
+    console.log("adding score for ", userid);
+}
+async function addPhoto (req, res) {
+    //photo url will be passed as parameter in url from react
+}
 async function deleteAStore (req, res) {
     console.log("Got to delteAStore");
     //the id will come on the req.params.id
@@ -197,8 +220,14 @@ await Item.addItem(theItem, parseInt(req.body.quantity), theComments, parseInt(r
 }
 
 
-module.exports = { loadMainPage,
+module.exports = { getScores,
+    getURLArray,
+    addScore,
+    addPhoto,
+    loadMainPage,
 deleteAStore,
 deleteAnItem,
 addStore,
 addItem};
+
+

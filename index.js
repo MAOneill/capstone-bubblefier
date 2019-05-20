@@ -30,7 +30,7 @@ app.use(session( {
 ));
 
 
-
+const logoutRouter = require('./routes/logout')
 const loginRouter = require('./routes/login');
 const signUpRouter = require('./routes/signup');
 const mainRouter = require('./routes/main');
@@ -38,16 +38,20 @@ const mainRouter = require('./routes/main');
 //allow you to get req.body parameters from POST form
 app.use(express.urlencoded({extended:true}));
 
+//check for user session.  if there is one, redirect to the front end....
 
 //login page
 app.use('/login',loginRouter);
 //sign up page
 app.use('/signup', signUpRouter);
 
-app.use('/main/',mainRouter);
+app.use('/logout',logoutRouter)
+
+app.use('/main',mainRouter);
 
 //default for all other pages'
 app.all('*',(req, res) => {
+    //this is loading /views/index.html
     res.render('index');
 })
 

@@ -12,14 +12,10 @@ values
 (1,20),
 (2,40);
 
-insert into photos
-(photo_url )
-values
-('/userphotos/dragonfly.jpg');
 
-insert into user_photos
-(user_id, photo_id)
+insert into photos
+(user_id, photo_url)
 values
-(1,1),
-(2,1),
-(3,1)
+(1,'/userphotos/dragonfly.jpg'),
+(2,'/userphotos/dragonfly.jpg'),
+(3,'/userphotos/dragonfly.jpg')

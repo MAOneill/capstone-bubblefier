@@ -25,7 +25,7 @@ async function  createNewUser(req, res) {
 
     
 }
-
+//this will serve the view/signup.html
 function showSignUp(req, res) {
     res.render('signup', {locals: {message: "Sign up here"}});
 }

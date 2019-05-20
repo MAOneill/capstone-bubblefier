@@ -6,13 +6,22 @@
   "directories": {
     "test": "test"
   },
+
+  "nodemonConfig": {
+    "ignore": [
+      "sessions",
+      "propertyphotos"
+    ]
+  },
+
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:create": "createdb bubblephoto-app",
     "db:init": "psql -f schema.sql bubblephoto-app && psql -f seed.sql bubblephoto-app",
     "db:destroy": "dropdb bubblephoto-app",
     "db:reset": "npm run db:destroy && npm run db:create && npm run db:init",
-    "dev": "nodemon index.js",
+    "dev": "nodemon --ignore sessions index.js",
     "start": "node index.js"
   },
   "repository": {
@@ -35,5 +44,8 @@
     "helmet": "^3.18.0",
     "pg-promise": "^8.7.2",
     "session-file-store": "^1.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
   }
 }

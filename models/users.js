@@ -85,7 +85,10 @@ class User {
                     })
                     return arrayofPhotoURLs;
                 })
-                //what happens when there are NO results??
+                .catch((error) => {
+                    console.error(error);
+                    return null;
+                })
     }
     
 };

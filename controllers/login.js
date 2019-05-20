@@ -1,6 +1,8 @@
 const User = require('../models/users');
 
 function showLoginPage (req, res) {
+
+    //take this dummy email out.  change it to DUMMY@email.com after testing*********
     res.render('login',{locals:{email:'margaret@oneillfish.com',message:'Please Log In'}});
 }
 
@@ -26,16 +28,17 @@ async function verifyUser  (req, res) {
 
 
                 req.session.save( () => {
-                    // res.render('main',{locals:{user:theUser.firstName,storeName:null,stores:userStores,items:[{item:"create New Item"}]}});
-                    
-                    // console.log("testing if req.session.userObject is a User object");
-                    // console.log(req.session.userObject instanceof User);       
-                    res.render('main',{locals:{user:""}});
+                    //this saves the req.sessions.userObject object.
+                    console.log("testing if req.session.userObject is a User object");
+                    console.log(req.session.userObject instanceof User);       
+                    console.log(req.session);
+                    res.redirect('/main');
 
 
                 })
             }
             //wrong password
+            //redirects to view/login.html
             else {
                 res.render('login',{locals:{email:req.body.email, message:"password incorrect. please try again"}});  //this will be a Get
     
@@ -51,4 +54,4 @@ async function verifyUser  (req, res) {
 
 
 
-module.exports =  {showLoginPage, verifyUser} ;
+module.exports =  { showLoginPage, verifyUser} ;
