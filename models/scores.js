@@ -26,7 +26,7 @@ class UserScore {
     static addUserScore(id,score){
         return db.result(`INSERT into user_score
         (user_id, score)
-        values ($1 $2)` , [id, score])
+        values ($1 ,$2)` , [id, score])
     }
 
     deleteScore(id) {

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 
-    <title>Grocery List app</title>
+    <title>Bubble Photo Backend Main app</title>
 </head>
 <style>
 
@@ -139,6 +139,14 @@ background-color: white;
                   <a href="/main/getscore">Get Scores</a>
                   <a href="/main/getphotos">Get Photos</a>
                 </div>
+                <div>
+                  <!-- this will call addphoto from controllers -->
+                  <br/>
+                <form action="/main/addurl" METHOD="POST" encType="multipart/form-data">
+                  <input name="foo" type="file" accept="image/png, image/jpeg, image/jpg, image/gif"/>
+                  <button type="submit" class="submit-button">Submit</button>
+              </form>
+            </div>
               </main>
 
 

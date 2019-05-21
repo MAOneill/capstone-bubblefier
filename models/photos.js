@@ -28,7 +28,7 @@ static getPhotoURLs(id) {
 static addPhotoURL(id,url) {
     return db.result(`INSERT into photos 
     (user_id, photo_url)
-    values ($1 $2)` , [id,url])
+    values ($1 , $2)` , [id, url])
 
 }
 
