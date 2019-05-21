@@ -47,8 +47,14 @@ async function getURLArray (req, res) {
 }
 async function addScore (req, res) {
     //the score value will be passed as an url parameter from react
-    const userid = req.params.id;
-    console.log("adding score for ", userid);
+    const score = req.params.score;
+    // console.log("adding a score of 3: ", score);
+
+    const response = await UserScore.addUserScore(req.session.userObject.id, score)
+    // console.log("tjhe response is :",response);
+    res.redirect('/main');
+    //this should return the response....
+
 }
     
     

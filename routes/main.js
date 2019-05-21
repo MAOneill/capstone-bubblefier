@@ -17,7 +17,7 @@ const { getScores,
 mainRouter.get('/getscore',getScores)
 mainRouter.get('/getphotos',getURLArray)
 
-mainRouter.post('/addscore',addScore);
+mainRouter.post('/addscore/:score',addScore);
 
 mainRouter.post('/addurl',addPhoto)
 
