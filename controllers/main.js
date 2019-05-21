@@ -46,7 +46,13 @@ async function getURLArray (req, res) {
     return urlArray;
 }
 async function addScore (req, res) {
+
+    //will this work?
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+res.setHeader('Access-Control-Allow-Credentials',true);
+
     //the score value will be passed as an url parameter from react
+    console.log("my req.body", req.body);
     const score = req.params.score;
     // console.log("adding a score of 3: ", score);
 
@@ -59,9 +65,15 @@ async function addScore (req, res) {
     
     
 async function addPhoto (req, res) {
+
+
+    //will this work?
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+res.setHeader('Access-Control-Allow-Credentials',true);
+
         //photo url will be passed as parameter in url from react
         // console.log("request is", req);
-        console.log(req.files);
+        console.log("req.files is" ,req.files);
     //using express-fileupload - it will b4e in the req.files object
     // console.log("the property image is ", req.files.properyimage);
     
@@ -69,7 +81,9 @@ async function addPhoto (req, res) {
           return res.status(400).send('No files were uploaded.');
         }
       
-        let sampleFile = (req.files.foo ? req.files.foo : "bad_file_name.xxx");
+        // let sampleFile = (req.files.foo ? req.files.foo : "bad_file_name.xxx");
+        let sampleFile = (req.files.file ? req.files.file : "bad_file_name.xxx");
+        console.log(sampleFile);
     //   console.log(sampleFile.name);
         //get a unique number based on date and user id:
         let userid = (req.session.userId ? req.session.userId : 0).toString() ;
@@ -85,7 +99,9 @@ async function addPhoto (req, res) {
           //   res.send('File uploaded!');
   
           // save the data to the database
-          await Photos.addPhotoURL(req.session.userObject.id,`photos/${fileName}`) ;
+          await Photos.addPhotoURL(1,`photos/${fileName}`) ;
+        //   await Photos.addPhotoURL(req.session.userObject.id,`photos/${fileName}`) ;
+        // console.log("backend thinks req.session id is : ",req.session.userObject.id);
           res.redirect('/main');
         //   showProperty(req.body.propid,"Image uploaded",false, req, res)
 
@@ -95,12 +111,23 @@ async function addPhoto (req, res) {
 
 }
 
+function returnUserID (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Credentials',true);
+
+    console.log("The request is", req);
+
+    // console.log("returnUserID function called id is:",req.session.userObject.id);
+    // return req.session.userObject.id
+    res.json(req.session)
+}
 
 module.exports = { getScores,
     getURLArray,
     addScore,
     addPhoto,
     loadMainPage,
+    returnUserID,
 };
 
 

@@ -8,7 +8,7 @@ class UserScore {
     } 
 
     static getAllScores(id) {
-        return db.any(`SELECT * from user_score WHERE id=${id}`)
+        return db.any(`SELECT * from user_score WHERE user_id=${id}`)
             .then((scores)=> {
                 const scoreArray = [];
                 scores.map(score => {

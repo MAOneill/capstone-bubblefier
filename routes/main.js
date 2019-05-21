@@ -8,6 +8,7 @@ const { getScores,
     addScore,
     addPhoto,
     loadMainPage,
+    returnUserID,
     } = require('../controllers/main');
 
     //just making a request to a url is a GET
@@ -20,6 +21,7 @@ mainRouter.get('/getphotos',getURLArray)
 mainRouter.post('/addscore/:score',addScore);
 
 mainRouter.post('/addurl',addPhoto)
+mainRouter.get('/userid',returnUserID)
 
 
 mainRouter.post('/',loadMainPage);
