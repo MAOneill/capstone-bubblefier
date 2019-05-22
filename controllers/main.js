@@ -18,55 +18,110 @@ async function  loadMainPage(req, res) {
         }
 
         //#@#@#@#@#@#@#@#  THIS WILL CHANGE TO MY **FRONTEN D****
-        res.render('main')
+        res.redirect('main')
+        // res.render('main')
+        //res.redirect('/')   //this is what I will have!!
     
     })   
 }
 
 
 async function getScores (req, res) {
-    // use req.session.userObject.id as the userID from
     console.log("getScores is running");
-    const theScores = await UserScore.getAllScores(req.session.userObject.id)
+
+    let uid;
+    if (req.session.userObject) {
+        uid = req.session.userObject.id
+    }
+    else uid = 1;
+console.log("uid is ", uid);
+    const theScores = await UserScore.getAllScores(uid)
     //just return the json object.
-    console.log(theScores);
+    // console.log(theScores);
     //this will used as an axios/fetch
 
     // i won't need the redirect once this is called in react
-    res.redirect('/main')
-    return theScores;
-    //don't res.render
+    // res.redirect('/main')
+    res.json(theScores)
+
+    // return theScores;
 }
 async function getURLArray (req, res) {
     // use req.session.userObject.id as the userID from
     console.log("getURLArray is running");
-    const urlArray = await Photos.getPhotoURLs(req.session.userObject.id);
+let urlArray;
+    if (req.session.userObject) {
+
+         urlArray = await Photos.getPhotoURLs(req.session.userObject.id);
+    }
+    else {
+        //take this else out
+        console.log("user id hardcoded to 1");
+         urlArray = await Photos.getPhotoURLs(1);
+    }
     console.log(urlArray);
-    res.redirect('/main');
-    return urlArray;
+    res.json(urlArray)
+
+    // res.redirect('/main');
+    // return urlArray;
 }
 async function addScore (req, res) {
 
-    //will this work?
+    //this works, but I won't need it when I put my backend with my front end
 res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 res.setHeader('Access-Control-Allow-Credentials',true);
 
     //the score value will be passed as an url parameter from react
-    console.log("my req.body", req.body);
+    // console.log("my req.body", req.body);
     const score = req.params.score;
+    // let uid = req.params.uid;
+
+    if (req.session.userObject) {
+        uid = req.session.userObject
+    }
+    else {
+        uid = 1;
+    }
+    
+
     // console.log("adding a score of 3: ", score);
 
-    const response = await UserScore.addUserScore(req.session.userObject.id, score)
-    // console.log("tjhe response is :",response);
-    res.redirect('/main');
+    //I NEED TO GET THE USERID FROM PARAMS TOO...
+
+
+    // const response = await UserScore.addUserScore(req.session.userObject.id, score)
+    const response = await UserScore.addUserScore(uid, score)
+    console.log("tjhe response is :",response);
+    // res.redirect('/main');
     //this should return the response....
+    if (response.rowCount === 1) {
+        res.json({message:"new score added for user"})
+    }
+    else {
+        res.json({message:"score not added, something went wrong"})
+    }
 
 }
     
     
 async function addPhoto (req, res) {
 
+let uid ;
 
+if (req.session.userObject) {
+    uid = req.session.userObject.id
+}
+else {
+    console.log("resetting uid to 1");
+    uid = 1;
+}
+// if (req.params.uid === "null") {
+//     uid = 1
+// }
+
+
+// console.log("req.params.uid is :", req.params.uid);
+// console.log("the uid is ", uid);
     //will this work?
 res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 res.setHeader('Access-Control-Allow-Credentials',true);
@@ -78,7 +133,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
     // console.log("the property image is ", req.files.properyimage);
     
         if (Object.keys(req.files).length == 0) {
-          return res.status(400).send('No files were uploaded.');
+          return res.status(400).json({message:'No files were uploaded.'});
         }
       
         // let sampleFile = (req.files.foo ? req.files.foo : "bad_file_name.xxx");
@@ -93,16 +148,17 @@ res.setHeader('Access-Control-Allow-Credentials',true);
         sampleFile.mv(`./public/photos/${fileName}`, async function(err) {
           if (err) {
 
-              return res.status(500).send(err);
+              return res.status(500).json({message:'error - No files were uploaded.'});
           }
-       
           //   res.send('File uploaded!');
   
           // save the data to the database
-          await Photos.addPhotoURL(1,`photos/${fileName}`) ;
+          await Photos.addPhotoURL(uid,`photos/${fileName}`) ;
         //   await Photos.addPhotoURL(req.session.userObject.id,`photos/${fileName}`) ;
         // console.log("backend thinks req.session id is : ",req.session.userObject.id);
-          res.redirect('/main');
+        res.json({message:"file uploaded succesfully"})
+
+        //   res.redirect('/main');
         //   showProperty(req.body.propid,"Image uploaded",false, req, res)
 
       
@@ -115,11 +171,20 @@ function returnUserID (req, res) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Credentials',true);
 
-    console.log("The request is", req);
+    // console.log("The request is", req);
 
     // console.log("returnUserID function called id is:",req.session.userObject.id);
     // return req.session.userObject.id
-    res.json(req.session)
+    if (req.session.userObject) {
+        res.json(req.session)
+
+    }
+    else {   ///#$#$#$#$#$$#$#$$#take this out!!!
+        res.json({userObject:{
+            id:1,
+            email:"dummy@anywhere.com",
+        }})
+    }
 }
 
 module.exports = { getScores,
