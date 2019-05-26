@@ -4,7 +4,7 @@ const UserScore = require('../models/scores')
 
 const sharp = require('sharp');
 
-
+const fs = require('fs')
 
 const escapeHtml = require('../utils');
 
@@ -161,12 +161,19 @@ res.setHeader('Access-Control-Allow-Credentials',true);
         sharp(`./public/photos/${fileName}`)
         .rotate()
         .resize(800,800)
-        .toFile(`./public/photos/${fileName}X`)
+        .toFile(`./public/photos/X${fileName}`)
         
           //   res.send('File uploaded!');
-  
+        //   await fs.unlinkSync(`./public/photos/${fileName}`)
+        
+        setInterval(() => {
+            fs.unlink(`./public/photos/${fileName}`,(err) => {
+                  console.error(err);
+              })
+
+        },5000)  
           // save the data to the database
-          await Photos.addPhotoURL(uid,`photos/${fileName}X`) ;
+          await Photos.addPhotoURL(uid,`photos/X${fileName}`) ;
         //   await Photos.addPhotoURL(req.session.userObject.id,`photos/${fileName}`) ;
         // console.log("backend thinks req.session id is : ",req.session.userObject.id);
         res.json({message:"file uploaded succesfully"})
