@@ -159,6 +159,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
 
            //attemp to use sharp to resize the iamge before saving
         sharp(`./public/photos/${fileName}`)
+        .rotate()
         .resize(800,800)
         .toFile(`./public/photos/${fileName}X`)
         
