@@ -9,8 +9,8 @@ values
 insert into user_score
 ( user_id, score)
 values
-(1,20),
-(2,40);
+(1,1),
+(2,0);
 
 
 insert into photos

@@ -2,7 +2,7 @@ const User = require('../models/users');
 const Photos = require('../models/photos')
 const UserScore = require('../models/scores')
 
-
+const sharp = require('sharp');
 
 
 
@@ -141,19 +141,31 @@ res.setHeader('Access-Control-Allow-Credentials',true);
         console.log(sampleFile);
     //   console.log(sampleFile.name);
         //get a unique number based on date and user id:
+
+
+    
         let userid = (req.session.userId ? req.session.userId : 0).toString() ;
         let date = new Date();
         let seconds = parseInt(date.getTime() / 1000).toString();
         let fileName = userid + seconds + sampleFile.name;
+
+
+       
         sampleFile.mv(`./public/photos/${fileName}`, async function(err) {
           if (err) {
 
               return res.status(500).json({message:'error - No files were uploaded.'});
           }
+
+           //attemp to use sharp to resize the iamge before saving
+        sharp(`./public/photos/${fileName}`)
+        .resize(800,800)
+        .toFile(`./public/photos/${fileName}X`)
+        
           //   res.send('File uploaded!');
   
           // save the data to the database
-          await Photos.addPhotoURL(uid,`photos/${fileName}`) ;
+          await Photos.addPhotoURL(uid,`photos/${fileName}X`) ;
         //   await Photos.addPhotoURL(req.session.userObject.id,`photos/${fileName}`) ;
         // console.log("backend thinks req.session id is : ",req.session.userObject.id);
         res.json({message:"file uploaded succesfully"})
