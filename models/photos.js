@@ -16,7 +16,7 @@ static getPhotoURLs(id) {
                 const aUrl = new Photos(url.id, url.user_id, url.photo_url)
                 urlArray.push(aUrl);
             })
-            console.log("models photos",urlArray)
+            // console.log("models photos",urlArray)
             return urlArray;
         })     
         .catch((error) => {
@@ -32,7 +32,8 @@ static addPhotoURL(id,url) {
 
 }
 
-deleteURL(id) {
+static deleteURL(id) {
+    console.log("DELETE URL PHOTO IS RUNNING")
     db.result(`DELETE from photos where id = $1`, [id])
     .catch((error) => {
         console.error(error);

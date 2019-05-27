@@ -6,6 +6,7 @@ const mainRouter =  express.Router();
 const { getScores,
     getURLArray,
     addScore,
+    deletephoto,
     addPhoto,
     loadMainPage,
     returnUserID,
@@ -17,6 +18,10 @@ const { getScores,
 // mainRouter.post('/getscore',getScores)
 mainRouter.get('/getscore',getScores)
 mainRouter.get('/getphotos',getURLArray)
+
+// mainRouter.post('/deletephoto/:photoid',deletephoto)
+
+mainRouter.post('/deletephoto/:photoid/:photoword/:photourl',deletephoto)
 
 mainRouter.post('/addscore/:score',addScore);
 

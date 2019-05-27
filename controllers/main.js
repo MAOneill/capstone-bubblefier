@@ -59,7 +59,7 @@ let urlArray;
         console.log("user id hardcoded to 1");
          urlArray = await Photos.getPhotoURLs(1);
     }
-    console.log(urlArray);
+    // console.log(urlArray);
     res.json(urlArray)
 
     // res.redirect('/main');
@@ -102,7 +102,22 @@ res.setHeader('Access-Control-Allow-Credentials',true);
     }
 
 }
+async function deletephoto (req, res) {
     
+    console.log("delete photo id main controller:",req.params.photoid , req.params.photourl)
+    //remove the entry from the db based on record id
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Credentials',true);
+    
+    await Photos.deleteURL(req.params.photoid) ;
+
+   
+    fs.unlink(`./public/photos/${req.params.photourl}`,(err) => {
+        console.error(err);
+    })
+    res.json({message:"file deleted succesfully"})
+
+}
     
 async function addPhoto (req, res) {
 
@@ -138,7 +153,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
       
         // let sampleFile = (req.files.foo ? req.files.foo : "bad_file_name.xxx");
         let sampleFile = (req.files.file ? req.files.file : "bad_file_name.xxx");
-        console.log(sampleFile);
+        // console.log(sampleFile);
     //   console.log(sampleFile.name);
         //get a unique number based on date and user id:
 
@@ -166,7 +181,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
           //   res.send('File uploaded!');
         //   await fs.unlinkSync(`./public/photos/${fileName}`)
         
-        setInterval(() => {
+        setTimeout(() => {
             fs.unlink(`./public/photos/${fileName}`,(err) => {
                   console.error(err);
               })
@@ -210,6 +225,7 @@ function returnUserID (req, res) {
 module.exports = { getScores,
     getURLArray,
     addScore,
+    deletephoto,
     addPhoto,
     loadMainPage,
     returnUserID,
