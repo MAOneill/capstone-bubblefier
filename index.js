@@ -62,18 +62,52 @@ app.use('/logout',logoutRouter)
 
 app.use('/main',mainRouter);
 
+app.use('/index', (req,res) => {
+    // console.log("from /index" ,req.session)
+    if (req.session.userObject) {
+        res.redirect('/');
+
+    }
+    else {
+
+        res.render('index')
+    }
+})
+
+// app.get('/bubbles', frontendRedirect)
+// app.get('/puzzle', frontendRedirect)
+// app.get('/guess', frontendRedirect)
+// app.get('/splash', frontendRedirect)
+// app.get('/uploadphotos',frontendRedirect)
+
 //default for all other pages'
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/public/index.html'));
-});
 
+    //if logged in...
+    if (req.session.userObject) {
+        res.sendFile(path.join(__dirname+'/public/index.html'));
+
+    }
+    else {
+        //if not logged in:
+        res.render('index')
+    }
+})
+
+
+
+// function frontendRedirect(req,res) {
+//     res.sendFile(path.join(__dirname+'/public/index.html'));
+// }
 
 // app.all('*',(req, res) => {
 //     //this is loading /views/index.html
-
 //     //to keep the user's actual path on a CMD-R refresh....
-//     res.redirect('/');
+//     // res.redirect('/');
+//     res.render('index');
 // })
+
+
 app.listen(PORT,() => {
     console.log(`Server running on port: ${PORT}.`);
 })

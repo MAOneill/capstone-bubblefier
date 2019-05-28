@@ -14,7 +14,8 @@ async function  loadMainPage(req, res) {
         //if there is no logged in user, then redirect to login.
         //otherwise direclty going to /main will work
         if (req.session.userObject === null) {
-            res.redirect('login')
+            // res.redirect('/index')
+            res.render('index')
         }
 
         //#@#@#@#@#@#@#@#  THIS WILL CHANGE TO MY **FRONTEN D****
@@ -210,7 +211,10 @@ function returnUserID (req, res) {
     } 
     else {   
        
-        res.redirect('login')
+        // res.redirect('login')
+        // res.redirect('index')
+        res.render('index')
+
 
         // res.json({userObject:{
         //     id:1,
