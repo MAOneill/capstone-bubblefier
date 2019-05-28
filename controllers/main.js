@@ -19,7 +19,7 @@ async function  loadMainPage(req, res) {
 
         //#@#@#@#@#@#@#@#  THIS WILL CHANGE TO MY **FRONTEN D****
         res.redirect('main')
-        // res.render('main')
+        // res.render('/splash')
         //res.redirect('/')   //this is what I will have!!
     
     })   
@@ -208,12 +208,12 @@ function returnUserID (req, res) {
 
     // console.log("The request is", req);
 
-    // console.log("returnUserID function called id is:",req.session.userObject.id);
+    console.log("returnUserID function called id is:",req.session.userObject.id);
     // return req.session.userObject.id
     if (req.session.userObject) {
         res.json(req.session)
 
-    }
+    } 
     else {   ///#$#$#$#$#$$#$#$$#take this out!!!
         res.json({userObject:{
             id:1,

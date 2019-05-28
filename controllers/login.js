@@ -32,7 +32,8 @@ async function verifyUser  (req, res) {
                     console.log("testing if req.session.userObject is a User object");
                     console.log(req.session.userObject instanceof User);       
                     console.log(req.session);
-                    res.redirect('/main');
+                    //it has to go to / for react to pick up on it!
+                    res.redirect('/');
 
 
                 })
