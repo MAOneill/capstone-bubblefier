@@ -7,6 +7,7 @@ const PORT =process.env.PORT;
 console.log(PORT)
 const app = express();
 
+const path = require('path');
 
 const escapeHtml = require('./utils');
 //this module will protect our html headers from
@@ -62,12 +63,17 @@ app.use('/logout',logoutRouter)
 app.use('/main',mainRouter);
 
 //default for all other pages'
-app.all('*',(req, res) => {
-    //this is loading /views/index.html
-    res.render('index');
-})
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/public/index.html'));
+});
 
 
+// app.all('*',(req, res) => {
+//     //this is loading /views/index.html
+
+//     //to keep the user's actual path on a CMD-R refresh....
+//     res.redirect('/');
+// })
 app.listen(PORT,() => {
     console.log(`Server running on port: ${PORT}.`);
 })

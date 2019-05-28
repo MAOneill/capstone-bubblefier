@@ -18,7 +18,7 @@ async function  loadMainPage(req, res) {
         }
 
         //#@#@#@#@#@#@#@#  THIS WILL CHANGE TO MY **FRONTEN D****
-        res.redirect('main')
+        res.redirect('/')
         // res.render('/splash')
         //res.redirect('/')   //this is what I will have!!
     
@@ -71,8 +71,8 @@ let urlArray;
 async function addScore (req, res) {
 
     //this works, but I won't need it when I put my backend with my front end
-res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-res.setHeader('Access-Control-Allow-Credentials',true);
+// res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+// res.setHeader('Access-Control-Allow-Credentials',true);
 
     //the score value will be passed as an url parameter from react
     // console.log("my req.body", req.body);
@@ -104,8 +104,8 @@ async function deletephoto (req, res) {
     
     console.log("delete photo id main controller:",req.params.photoid , req.params.photourl)
     //remove the entry from the db based on record id
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Credentials',true);
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Credentials',true);
     
     await Photos.deleteURL(req.params.photoid) ;
 
@@ -128,8 +128,8 @@ else {
     res.redirect('login')
 }
 
-res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-res.setHeader('Access-Control-Allow-Credentials',true);
+// res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+// res.setHeader('Access-Control-Allow-Credentials',true);
 
         //photo url will be passed as parameter in url from react
         // console.log("request is", req);
@@ -194,8 +194,11 @@ res.setHeader('Access-Control-Allow-Credentials',true);
 }
 
 function returnUserID (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Credentials',true);
+
+    console.log("RUNNING LOAD MAIN PAGE...");
+
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Credentials',true);
 
     // console.log("The request is", req);
 
