@@ -33,8 +33,12 @@ async function getScores (req, res) {
     if (req.session.userObject) {
         uid = req.session.userObject.id
     }
-    else uid = 1;
-console.log("uid is ", uid);
+    else  {
+        res.redirect('login')
+    }
+    
+    
+    console.log("uid is ", uid);
     const theScores = await UserScore.getAllScores(uid)
     //just return the json object.
     // console.log(theScores);
@@ -55,9 +59,8 @@ let urlArray;
          urlArray = await Photos.getPhotoURLs(req.session.userObject.id);
     }
     else {
-        //take this else out
-        console.log("user id hardcoded to 1");
-         urlArray = await Photos.getPhotoURLs(1);
+       //not logged in:
+       res.redirect('login')
     }
     // console.log(urlArray);
     res.json(urlArray)
@@ -80,14 +83,9 @@ res.setHeader('Access-Control-Allow-Credentials',true);
         uid = req.session.userObject
     }
     else {
-        uid = 1;
+        res.redirect('login')
     }
     
-
-    // console.log("adding a score of 3: ", score);
-
-    //I NEED TO GET THE USERID FROM PARAMS TOO...
-
 
     // const response = await UserScore.addUserScore(req.session.userObject.id, score)
     const response = await UserScore.addUserScore(uid, score)
@@ -127,17 +125,9 @@ if (req.session.userObject) {
     uid = req.session.userObject.id
 }
 else {
-    console.log("resetting uid to 1");
-    uid = 1;
+    res.redirect('login')
 }
-// if (req.params.uid === "null") {
-//     uid = 1
-// }
 
-
-// console.log("req.params.uid is :", req.params.uid);
-// console.log("the uid is ", uid);
-    //will this work?
 res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 res.setHeader('Access-Control-Allow-Credentials',true);
 
@@ -208,17 +198,20 @@ function returnUserID (req, res) {
 
     // console.log("The request is", req);
 
-    console.log("returnUserID function called id is:",req.session.userObject.id);
+    // console.log("returnUserID function called id is:",req.session.userObject.id);
     // return req.session.userObject.id
     if (req.session.userObject) {
         res.json(req.session)
 
     } 
-    else {   ///#$#$#$#$#$$#$#$$#take this out!!!
-        res.json({userObject:{
-            id:1,
-            email:"dummy@anywhere.com",
-        }})
+    else {   
+       
+        res.redirect('login')
+
+        // res.json({userObject:{
+        //     id:1,
+        //     email:"dummy@anywhere.com",
+        // }})
     }
 }
 
