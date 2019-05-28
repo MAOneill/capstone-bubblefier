@@ -80,7 +80,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
     // let uid = req.params.uid;
 
     if (req.session.userObject) {
-        uid = req.session.userObject
+        uid = eq.session.userObject.id
     }
     else {
         res.redirect('login')
@@ -148,8 +148,9 @@ res.setHeader('Access-Control-Allow-Credentials',true);
         //get a unique number based on date and user id:
 
 
-    
-        let userid = (req.session.userId ? req.session.userId : 0).toString() ;
+    console.log("req session userID: ", req.session.userId);
+
+        let userid = (eq.session.userObject.id ? eq.session.userObject.id : 0).toString() ;
         let date = new Date();
         let seconds = parseInt(date.getTime() / 1000).toString();
         let fileName = userid + seconds + sampleFile.name;
