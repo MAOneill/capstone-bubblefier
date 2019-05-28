@@ -65,7 +65,9 @@ app.use('/main',mainRouter);
 app.use('/index', (req,res) => {
     // console.log("from /index" ,req.session)
     if (req.session.userObject) {
-        res.redirect('/');
+        // res.redirect('/');
+        res.sendFile(path.join(__dirname+'/public/index.html'));
+
 
     }
     else {

@@ -3,7 +3,7 @@ const User = require('../models/users');
 function showLoginPage (req, res) {
 
     //take this dummy email out.  change it to DUMMY@email.com after testing*********
-    res.render('login',{locals:{email:'margaret@oneillfish.com',message:'Please Log In'}});
+    res.render('login',{locals:{email:'enter email',message:'Please Log In'}});
 }
 
 async function verifyUser  (req, res) {

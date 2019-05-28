@@ -11,36 +11,30 @@
 
     <title>Pieces SignUp</title>
 </head>
-
-<style>
-
-</style>
-<body>
+<body class="loginpage">
 
     <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Please sign up for the Bubble Photo App  <br>
-       </h1>
-            <h2 class="alert alert-primary"> ${(message) ? message : "Sign up"}</h2>
-          <p class="lead text-muted">    
+        <div class="logincontainer">
+          <h1 class="jumbotron-heading">Please sign up for access to Pieces  </h1>
+            <h4 class="alert alert-primary"> ${(message) ? message : "Sign up"}</h4>
+        
               <form
         action="/signup"
         method="POST"
         >  
             <!-- copied from https://getbootstrap.com/docs/4.1/components/forms/ -->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input required value="tony@tony.com" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <label for="exampleInputEmail1">Email address</label><br/>
+                  <input required placeholder="we never share emails" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input required value="password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <label for="exampleInputPassword1">Password</label> <br />
+                  <input required placeholder="create a password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
     
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="loginbutton">Create Account</button>
               </form>
-        </p>
+      
         </div>
       </section>
 
