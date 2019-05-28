@@ -80,7 +80,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
     // let uid = req.params.uid;
 
     if (req.session.userObject) {
-        uid = eq.session.userObject.id
+        uid = req.session.userObject.id
     }
     else {
         res.redirect('login')
@@ -148,9 +148,9 @@ res.setHeader('Access-Control-Allow-Credentials',true);
         //get a unique number based on date and user id:
 
 
-    console.log("req session userID: ", req.session.userId);
+    console.log("req session userID: ", req.session.userObject.id);
 
-        let userid = (eq.session.userObject.id ? eq.session.userObject.id : 0).toString() ;
+        let userid = (req.session.userObject.id ? req.session.userObject.id : 0).toString() ;
         let date = new Date();
         let seconds = parseInt(date.getTime() / 1000).toString();
         let fileName = userid + seconds + sampleFile.name;
@@ -164,7 +164,7 @@ res.setHeader('Access-Control-Allow-Credentials',true);
           }
 
            //attemp to use sharp to resize the iamge before saving
-        sharp(`./public/photos/${fileName}`)
+        await sharp(`./public/photos/${fileName}`)
         .rotate()
         .resize(800,800)
         .toFile(`./public/photos/X${fileName}`)
