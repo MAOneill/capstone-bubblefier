@@ -16,6 +16,6 @@ values
 insert into photos
 (user_id, photo_url)
 values
-(1,'photos/bug.jpg'),
-(2,'photos/bug.jpg'),
-(3,'photos/bug.jpg')
+(1,'default/bug.jpg'),
+(2,'default/bug.jpg'),
+(3,'default/bug.jpg')
