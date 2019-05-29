@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.abb4240f.chunk.css",
+    "main.js": "/static/js/main.6ec83646.chunk.js",
+    "main.js.map": "/static/js/main.6ec83646.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.22542ea2.chunk.js": "/static/js/2.22542ea2.chunk.js",
+    "static/js/2.22542ea2.chunk.js.map": "/static/js/2.22542ea2.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.bf09dbe71a7e43c263c4fae26d9490e2.js": "/precache-manifest.bf09dbe71a7e43c263c4fae26d9490e2.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.abb4240f.chunk.css.map": "/static/css/main.abb4240f.chunk.css.map"
+  }
+}
