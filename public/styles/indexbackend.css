@@ -1,0 +1,94 @@
+body, html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+    .alert-primary {
+    color: #5f2f22;
+    background-color: #b8ffea;
+    border-color: #b8ffea;
+}
+
+.jumbotron {
+  padding: 1px;
+
+  background-color: #22262c;;
+}
+
+h1 {
+  margin:0;
+}
+.container {
+  display:flex;
+  justify-content:space-around;
+  flex-direction: column;
+  width:100%;
+}
+.container  *  {
+/* margin:auto; */
+width:100%;
+text-align: center;
+
+}
+.container div {
+  padding:10px;
+}
+.indexpage {
+ background-color: #b364f0;
+ height:1000px;
+ width:100%;
+
+}
+
+.loginpage {
+  background-color: #22262c;
+  height:1000px;
+  width:100%;
+  color:#f5eeb2;
+ 
+ }
+ .logincontainer {
+   display:flex;
+   width:60%;
+   margin:auto;
+   justify-content:space-around;
+   flex-direction: column;
+   text-align: center;
+ 
+ }
+ .logincontainer  * {
+   padding:3px;
+ }
+html {
+  box-sizing: border-box;
+
+  background-color: #ffb991 ;
+  background-color: #22262c;;
+
+}
+  .alert-primary {
+  color: #22262c;
+  background-color: #9ee4bd;
+  box-shadow: 0 3px 5px 0 #86ab97, 0 3px 5px 0 #86ab97;
+
+}
+
+.loginbutton {
+  background-color: #9ee4bd;
+  color: #22262c;
+  box-shadow: 0 3px 5px 0 #86ab97, 0 3px 5px 0 #86ab97;
+
+}
+a {
+  background-color:#b8ffea;
+  margin: 30px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #5f2f22;
+  text-decoration: none;
+}
+
+

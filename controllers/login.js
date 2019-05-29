@@ -15,7 +15,7 @@ async function verifyUser  (req, res) {
         //get the email from the post body
         // console.log(req.body.email);
         const theUser = await User.getByEmail(`${req.body.email}`);
-        // console.log(theUser);
+        console.log("the user",theUser);
     
         // console.log("theUser for bad email", theUser);
         //if the user not found, redirect to the signup page
@@ -33,7 +33,7 @@ async function verifyUser  (req, res) {
                     console.log(req.session.userObject instanceof User);       
                     console.log(req.session);
                     //it has to go to / for react to pick up on it!
-                    res.redirect('/');
+                    res.redirect('/main');
 
 
                 })
