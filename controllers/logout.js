@@ -4,7 +4,9 @@ function logout (req, res) {
     req.session.userObject=null;
     req.session.email=null;
     req.session.save(() => {
-        res.redirect('/index')
+        // res.redirect('/')
+        res.render('indexback')
+
     });
 }
 module.exports =  {logout} ;
