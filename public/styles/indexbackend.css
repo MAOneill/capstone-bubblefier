@@ -4,6 +4,13 @@ body, html {
 .loginpage * {
   font-size:110%;
 }
+.myform {
+  display:flex;
+  flex-direction: column;
+}
+.form-control {
+  width:100%;
+}
   *, *:before, *:after {
     box-sizing: inherit;
   }
@@ -54,7 +61,7 @@ text-align: center;
  }
  .logincontainer {
    display:flex;
-   width:60%;
+   width:80%;
    margin:auto;
    justify-content:space-around;
    flex-direction: column;
