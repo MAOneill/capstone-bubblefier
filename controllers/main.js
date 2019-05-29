@@ -15,7 +15,7 @@ async function  loadMainPage(req, res) {
         //otherwise direclty going to /main will work
         if (req.session.userObject === null) {
             // res.redirect('/index')
-            res.render('index')
+            res.redirect('indexback')
         }
 
         //#@#@#@#@#@#@#@#  THIS WILL CHANGE TO MY **FRONTEN D****
@@ -35,7 +35,7 @@ async function getScores (req, res) {
         uid = req.session.userObject.id
     }
     else  {
-        res.redirect('login')
+        res.redirect('indexback')
     }
     
     
@@ -213,7 +213,7 @@ function returnUserID (req, res) {
        
         // res.redirect('login')
         // res.redirect('index')
-        res.render('index')
+        res.redirect('indexback')
 
 
         // res.json({userObject:{

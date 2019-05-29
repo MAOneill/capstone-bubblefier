@@ -69,7 +69,7 @@ app.get('*', (req,res,next) =>{
 console.log("line 87")
     //if logged in...
     if (req.session.userObject) {
-        console.log("line 91 should not run")
+        // console.log("line 91 should not run")
         next();
         return;
 
