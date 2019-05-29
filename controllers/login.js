@@ -29,11 +29,11 @@ async function verifyUser  (req, res) {
 
                 req.session.save( () => {
                     //this saves the req.sessions.userObject object.
-                    console.log("testing if req.session.userObject is a User object");
-                    console.log(req.session.userObject instanceof User);       
+                    // console.log("testing if req.session.userObject is a User object");
+                    // console.log(req.session.userObject instanceof User);       
                     console.log(req.session);
                     //it has to go to / for react to pick up on it!
-                    res.redirect('/main');
+                    res.redirect('/');
 
 
                 })
