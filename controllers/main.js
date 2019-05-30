@@ -215,8 +215,8 @@ function returnUserID (req, res) {
        
         // res.redirect('login')
         // res.redirect('index')
-        res.redirect('indexback')
-
+        // res.redirect('indexback') //was this
+        res.render('indexback')
 
         // res.json({userObject:{
         //     id:1,
