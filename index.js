@@ -65,12 +65,13 @@ app.use('/main',mainRouter);
 
 
 //default for all other pages'
-app.get('*', (req,res,next) =>{
+app.get('*', (req,res) =>{
 console.log("line 87")
     //if logged in...
     if (req.session.userObject) {
         // console.log("line 91 should not run")
-        next();
+        res.sendFile(path.join(__dirname+'/public/index.html'));
+        // next();
         return;
 
     }
@@ -81,12 +82,11 @@ console.log("line 87")
     }
 })
 
-app.use('*', (req,res) => {
-
-    res.sendFile(path.join(__dirname+'/public/index.html'));
+// app.use('*', (req,res) => {
 
 
-})
+
+// })
 
 
 
